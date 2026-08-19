@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แบบสอบถามความต้องการเบื้องต้น | Cogistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #27619E;
+      --navy-dark: #1a4a7a;
+      --navy-light: #3a7bc8;
+      --gold: #C8A96E;
+      --gold-light: #dfc08a;
+      --white: #FFFFFF;
+      --dark: #252525;
+      --deep: #100F0F;
+      --grey: #6b7280;
+      --grey-light: #f3f6fb;
+      --grey-border: #dde3ed;
+      --error: #dc2626;
+      --success: #16a34a;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(39,97,158,0.10);
+      --shadow-card: 0 2px 12px rgba(39,97,158,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans Thai', 'Noto Sans', sans-serif;
+      background: linear-gradient(160deg, #f0f5fb 0%, #e8f0f9 60%, #f5f0e8 100%);
+      min-height: 100vh;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    body.lang-zh { font-family: 'Noto Sans SC', 'Noto Sans Thai', sans-serif; }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--navy);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-frost {
+      position: absolute; inset: 0;
+      background: 
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(200,169,110,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      background: var(--gold);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .logo-sub {
+      color: rgba(255,255,255,0.55);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── LANG SWITCHER ── */
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 8px;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .lang-btn:hover:not(.active) { color: var(--white); }
+
+    .header-title {
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .header-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      padding: 0 24px;
+      background: var(--navy-dark);
+    }
+
+    .progress-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px 0;
+    }
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      flex-shrink: 0;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-dot.active {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--navy);
+      box-shadow: 0 0 0 4px rgba(200,169,110,0.25);
+    }
+
+    .step-dot.done {
+      background: rgba(200,169,110,0.3);
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(255,255,255,0.12);
+      transition: background 0.3s;
+    }
+
+    .step-line.done { background: rgba(200,169,110,0.4); }
+
+    .progress-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    /* ── MAIN CARD ── */
+    .main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .page-header {
+      background: var(--grey-light);
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--grey-border);
+    }
+
+    .page-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .page-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--deep);
+      line-height: 1.3;
+    }
+
+    .page-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── FIELDS ── */
+    .field { display: flex; flex-direction: column; gap: 8px; }
+
+    .field-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.4;
+    }
+
+    .required-star { color: var(--navy-dark); margin-left: 3px; }
+
+    .field-desc {
+      font-size: 12px;
+      color: var(--grey);
+      margin-top: -4px;
+      line-height: 1.5;
+    }
+
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="tel"],
+    .field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--grey-border);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--dark);
+      background: var(--white);
+      transition: border-color 0.18s, box-shadow 0.18s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(39,97,158,0.10);
+    }
+
+    .field input.error,
+    .field textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+    }
+
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    .error-msg {
+      font-size: 12px;
+      color: var(--error);
+      display: none;
+    }
+
+    .field.has-error .error-msg { display: block; }
+
+    /* ── RADIO / CHECKBOX ── */
+    .options { display: flex; flex-direction: column; gap: 10px; }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--grey-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.18s;
+      position: relative;
+    }
+
+    .option-item:hover { border-color: var(--navy-light); background: #f7faff; }
+
+    .option-item.selected {
+      border-color: var(--navy);
+      background: #eef4fd;
+    }
+
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: var(--navy);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .option-label {
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .option-sub {
+      font-size: 12px;
+      color: var(--grey);
+      margin-top: 2px;
+    }
+
+    .other-input {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .other-input.visible { display: block; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--grey-border);
+      margin: 4px 0;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      padding: 20px 28px 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      border-top: 1px solid var(--grey-border);
+      background: var(--grey-light);
+    }
+
+    .btn {
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-primary:hover { background: var(--navy-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(39,97,158,0.25); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--grey-border);
+    }
+
+    .btn-secondary:hover { border-color: var(--navy); background: #f0f5fb; }
+
+    .btn-submit {
+      background: var(--navy);
+      color: var(--white);
+      flex: 1;
+      justify-content: center;
+    }
+
+    .btn-submit:hover { background: var(--navy-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(200,169,110,0.35); }
+
+    /* ── SUCCESS PAGE ── */
+    .success-page {
+      display: none;
+      text-align: center;
+      padding: 56px 28px 48px;
+    }
+
+    .success-page.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .success-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--deep);
+    }
+
+    .success-desc {
+      font-size: 15px;
+      color: var(--grey);
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .btn-website {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.18s;
+      margin-top: 8px;
+    }
+
+    .btn-website:hover { background: var(--navy-dark); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    .form-footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--grey);
+      font-size: 12px;
+    }
+
+    .form-footer a { color: var(--navy); text-decoration: none; }
+
+    /* ── LOADING STATE ── */
+    .btn-submit.loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(39,97,158,0.2);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .btn-submit.loading .spinner { display: block; }
+    .btn-submit.loading .btn-text { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .header-inner { padding: 24px 16px 20px; }
+      .page-header { padding: 20px 20px 16px; }
+      .page-body { padding: 20px; gap: 20px; }
+      .btn-row { padding: 16px 20px 20px; }
+      .header-title { font-size: 18px; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .page.active {
+      animation: fadeSlide 0.25s ease;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page.active { animation: none; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-frost"></div>
+    <div class="header-inner">
+      <div class="header-top">
+        <div class="logo-area">
+          <div class="logo-mark">CG</div>
+          <div>
+            <div class="logo-text">COGISTICS</div>
+            <div class="logo-sub">Cold Chain Solutions</div>
+          </div>
+        </div>
+        <div class="lang-switcher">
+          <button class="lang-btn active" onclick="setLang('th')">ไทย</button>
+          <button class="lang-btn" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" onclick="setLang('zh')">中文</button>
+        </div>
+      </div>
+      <div>
+        <div class="header-title" data-th="แบบสอบถามความต้องการเบื้องต้น" data-en="Initial Requirements Survey" data-zh="初步需求调查表"></div>
+        <div class="header-desc" data-th="กรุณากรอกข้อมูลเพื่อให้ทีมงาน Cogistics เข้าใจความต้องการของท่านได้ดียิ่งขึ้น" data-en="Please fill in this form so the Cogistics team can better understand your needs." data-zh="请填写此表格，以便 Cogistics 团队更好地了解您的需求。"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-steps" id="progressSteps">
+        <div class="progress-step">
+          <div class="step-dot active" id="dot1">1</div>
+          <div class="step-line" id="line1"></div>
+        </div>
+        <div class="progress-step">
+          <div class="step-dot" id="dot2">2</div>
+          <div class="step-line" id="line2"></div>
+        </div>
+        <div class="progress-step">
+          <div class="step-dot" id="dot3">3</div>
+          <div class="step-line" id="line3"></div>
+        </div>
+        <div class="progress-step">
+          <div class="step-dot" id="dot4">4</div>
+        </div>
+      </div>
+      <div class="progress-label" id="progressLabel"></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="form-card" id="formCard">
+
+      <!-- PAGE 1: ข้อมูลการติดต่อ -->
+      <div class="page active" id="page1">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 1 จาก 4" data-en="Step 1 of 4" data-zh="第 1 步，共 4 步"></div>
+          <div class="page-title" data-th="ข้อมูลการติดต่อ" data-en="Contact Information" data-zh="联系信息"></div>
+        </div>
+        <div class="page-body">
+
+          <div class="field" id="f-company">
+            <label class="field-label" for="company">
+              <span data-th="ชื่อบริษัท" data-en="Company Name" data-zh="公司名称"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="company" name="company" />
+            <span class="error-msg" data-th="กรุณากรอกชื่อบริษัท" data-en="Please enter your company name" data-zh="请输入公司名称"></span>
+          </div>
+
+          <div class="field" id="f-contact">
+            <label class="field-label" for="contact">
+              <span data-th="ชื่อผู้ติดต่อ และตำแหน่ง" data-en="Contact Name & Position" data-zh="联系人姓名及职位"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="contact" name="contact" />
+            <span class="error-msg" data-th="กรุณากรอกชื่อและตำแหน่ง" data-en="Please enter your name and position" data-zh="请输入您的姓名和职位"></span>
+          </div>
+
+          <div class="field" id="f-email">
+            <label class="field-label" for="email">
+              <span data-th="อีเมล" data-en="Email" data-zh="电子邮件"></span><span class="required-star">*</span>
+            </label>
+            <input type="email" id="email" name="email" />
+            <span class="error-msg" data-th="กรุณากรอกอีเมลที่ถูกต้อง" data-en="Please enter a valid email address" data-zh="请输入有效的电子邮件地址"></span>
+          </div>
+
+          <div class="field" id="f-phone">
+            <label class="field-label" for="phone">
+              <span data-th="เบอร์ติดต่อ" data-en="Phone Number" data-zh="联系电话"></span><span class="required-star">*</span>
+            </label>
+            <input type="tel" id="phone" name="phone" />
+            <span class="error-msg" data-th="กรุณากรอกเบอร์ติดต่อ" data-en="Please enter your phone number" data-zh="请输入您的联系电话"></span>
+          </div>
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="goNext(1)">
+            <span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →
+          </button>
+        </div>
+      </div>
+
+      <!-- PAGE 2: วัตถุประสงค์ -->
+      <div class="page" id="page2">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 4" data-en="Step 2 of 4" data-zh="第 2 步，共 4 步"></div>
+          <div class="page-title" data-th="วัตถุประสงค์ในการใช้บริการ" data-en="Service Objective" data-zh="服务目的"></div>
+        </div>
+        <div class="page-body">
+
+          <div class="field" id="f-solution">
+            <label class="field-label">
+              <span data-th="วัตถุประสงค์หลักของท่าน และสิ่งที่ต้องการให้ Cogistics ช่วยดูแล" data-en="Your main objective and what you need Cogistics to help with" data-zh="您的主要目标以及您需要 Cogistics 帮助的内容"></span><span class="required-star">*</span>
+            </label>
+            <div class="options">
+              <label class="option-item" onclick="selectOption(this, 'solution', 'veggie')">
+                <input type="radio" name="solution" value="veggie" />
+                <div>
+                  <div class="option-label" data-th="🥬 Vegetable Industry Solutions" data-en="🥬 Vegetable Industry Solutions" data-zh="🥬 蔬菜行业解决方案"></div>
+                  <div class="option-sub" data-th="การจัดหาวัตถุดิบ ผักผลไม้สด/แช่แข็งเพื่อภาคอุตสาหกรรม" data-en="Sourcing fresh/frozen vegetables and fruits for the industrial sector" data-zh="为工业部门采购新鲜/冷冻蔬菜和水果"></div>
+                </div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'solution', 'food')">
+                <input type="radio" name="solution" value="food" />
+                <div>
+                  <div class="option-label" data-th="🚚 Food Pipeline Solutions" data-en="🚚 Food Pipeline Solutions" data-zh="🚚 食品供应链解决方案"></div>
+                  <div class="option-sub" data-th="การจัดเก็บและกระจายสินค้าตามโจทย์ของลูกค้า" data-en="Storage and distribution of goods according to client requirements" data-zh="根据客户要求进行货物储存和配送"></div>
+                </div>
+              </label>
+            </div>
+            <span class="error-msg" data-th="กรุณาเลือกวัตถุประสงค์" data-en="Please select an objective" data-zh="请选择目标"></span>
+          </div>
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goBack(2)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
+          <button class="btn btn-primary" onclick="goNext(2)"><span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →</button>
+        </div>
+      </div>
+
+      <!-- PAGE 3: Vegetable Industry Solutions -->
+      <div class="page" id="page3">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 3 จาก 4" data-en="Step 3 of 4" data-zh="第 3 步，共 4 步"></div>
+          <div class="page-title" data-th="ข้อมูลความต้องการ — Vegetable Industry Solutions" data-en="Requirements — Vegetable Industry Solutions" data-zh="需求信息 — 蔬菜行业解决方案"></div>
+        </div>
+        <div class="page-body">
+
+          <div class="field" id="f-veg-product">
+            <label class="field-label" for="vegProduct">
+              <span data-th="สินค้าและขนาดของสินค้าที่ท่านกำลังตามหา" data-en="Product and size you are looking for" data-zh="您正在寻找的产品及规格"></span><span class="required-star">*</span>
+            </label>
+            <div class="field-desc" data-th="เช่น สตรอว์เบอร์รี, ซอสมะเขือเทศ, มะม่วงหั่นเต๋า" data-en="e.g. Strawberry, Tomato sauce, Diced mango" data-zh="例如：草莓、番茄酱、切块芒果"></div>
+            <input type="text" id="vegProduct" name="vegProduct" />
+            <span class="error-msg" data-th="กรุณากรอกข้อมูลสินค้า" data-en="Please enter product details" data-zh="请输入产品信息"></span>
+          </div>
+
+          <div class="field" id="f-veg-endproduct">
+            <label class="field-label" for="vegEndProduct">
+              <span data-th="สินค้าปลายทางของท่าน (End Product)" data-en="Your end product" data-zh="您的最终产品"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="vegEndProduct" name="vegEndProduct" />
+            <span class="error-msg" data-th="กรุณากรอกสินค้าปลายทาง" data-en="Please enter your end product" data-zh="请输入最终产品"></span>
+          </div>
+
+          <div class="field" id="f-veg-volume">
+            <label class="field-label" for="vegVolume">
+              <span data-th="ปริมาณการใช้งาน" data-en="Usage Volume" data-zh="使用量"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="vegVolume" name="vegVolume" />
+            <span class="error-msg" data-th="กรุณากรอกปริมาณการใช้งาน" data-en="Please enter usage volume" data-zh="请输入使用量"></span>
+          </div>
+
+          <div class="field" id="f-veg-pain">
+            <label class="field-label">
+              <span data-th="ปัญหาหลักที่ท่านกำลังเผชิญอยู่" data-en="Main challenges you are facing" data-zh="您目前面临的主要挑战"></span>
+              <span class="field-desc" style="display:block;margin-top:4px;" data-th="(เลือกได้มากกว่า 1 ข้อ)" data-en="(Select all that apply)" data-zh="（可多选）"></span>
+            </label>
+            <div class="options">
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="vegPain" value="npd" />
+                <div class="option-label" data-th="การพัฒนาสินค้าใหม่ (NPD)" data-en="New Product Development (NPD)" data-zh="新产品开发 (NPD)"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="vegPain" value="supply" />
+                <div class="option-label" data-th="สินค้าขาดตลาด / ซัพพลายไม่สม่ำเสมอ" data-en="Supply shortage / Inconsistent supply" data-zh="供应短缺/供应不稳定"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="vegPain" value="second" />
+                <div class="option-label" data-th="ต้องการหาซัพพลายเออร์รายที่สอง" data-en="Looking for a second supplier" data-zh="寻找第二供应商"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="vegPain" value="cost" />
+                <div class="option-label" data-th="ปัญหาด้านต้นทุนหรือคุณภาพ" data-en="Cost or quality inconsistency" data-zh="成本或质量问题"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)" id="veg-other-item">
+                <input type="checkbox" name="vegPain" value="other" onchange="toggleOtherInput('vegOtherInput', this)" />
+                <div style="flex:1">
+                  <div class="option-label" data-th="อื่นๆ" data-en="Other" data-zh="其他"></div>
+                  <div class="other-input" id="vegOtherInput">
+                    <input type="text" id="vegOtherText" name="vegOtherText" placeholder="" style="margin-top:8px;" />
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="vegDetails">
+              <span data-th="โปรดอธิบายเพิ่มเติมปัญหาที่ท่านกำลังเผชิญอยู่" data-en="Please describe your challenges in more detail" data-zh="请详细描述您面临的挑战"></span>
+            </label>
+            <textarea id="vegDetails" name="vegDetails" rows="4"></textarea>
+          </div>
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goBack(3)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
+          <button class="btn btn-primary" onclick="goNext(3)"><span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →</button>
+        </div>
+      </div>
+
+      <!-- PAGE 4: Food Pipeline Solutions -->
+      <div class="page" id="page4">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 3 จาก 4" data-en="Step 3 of 4" data-zh="第 3 步，共 4 步"></div>
+          <div class="page-title" data-th="ข้อมูลความต้องการ — Food Pipeline Solutions" data-en="Requirements — Food Pipeline Solutions" data-zh="需求信息 — 食品供应链解决方案"></div>
+        </div>
+        <div class="page-body">
+
+          <div class="field" id="f-food-product">
+            <label class="field-label" for="foodProduct">
+              <span data-th="สินค้าและขนาดของสินค้าของท่าน" data-en="Your product and its specifications" data-zh="您的产品及规格"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="foodProduct" name="foodProduct" />
+            <span class="error-msg" data-th="กรุณากรอกข้อมูลสินค้า" data-en="Please enter product details" data-zh="请输入产品信息"></span>
+          </div>
+
+          <div class="field" id="f-food-type">
+            <label class="field-label">
+              <span data-th="ประเภทของสินค้าของท่าน" data-en="Product type" data-zh="产品类型"></span><span class="required-star">*</span>
+            </label>
+            <div class="options">
+              <label class="option-item" onclick="selectOption(this, 'foodType', 'food')">
+                <input type="radio" name="foodType" value="food" />
+                <div class="option-label" data-th="🍱 อาหาร" data-en="🍱 Food" data-zh="🍱 食品"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'foodType', 'drink')">
+                <input type="radio" name="foodType" value="drink" />
+                <div class="option-label" data-th="🥤 เครื่องดื่ม" data-en="🥤 Beverage" data-zh="🥤 饮料"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'foodType', 'seasoning')">
+                <input type="radio" name="foodType" value="seasoning" />
+                <div class="option-label" data-th="🧂 เครื่องปรุง" data-en="🧂 Seasoning" data-zh="🧂 调味品"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'foodType', 'snack')">
+                <input type="radio" name="foodType" value="snack" />
+                <div class="option-label" data-th="🍪 ขนม" data-en="🍪 Snack" data-zh="🍪 零食"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'foodType', 'other'); toggleOtherInput('foodTypeOtherInput', document.querySelector('[name=foodType][value=other]'))">
+                <input type="radio" name="foodType" value="other" />
+                <div style="flex:1">
+                  <div class="option-label" data-th="อื่นๆ" data-en="Other" data-zh="其他"></div>
+                  <div class="other-input" id="foodTypeOtherInput">
+                    <input type="text" id="foodTypeOtherText" name="foodTypeOtherText" style="margin-top:8px;" />
+                  </div>
+                </div>
+              </label>
+            </div>
+            <span class="error-msg" data-th="กรุณาเลือกประเภทสินค้า" data-en="Please select a product type" data-zh="请选择产品类型"></span>
+          </div>
+
+          <div class="field" id="f-food-volume">
+            <label class="field-label" for="foodVolume">
+              <span data-th="ปริมาณการใช้งานทั้งหมด" data-en="Total usage volume" data-zh="总使用量"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="foodVolume" name="foodVolume" />
+            <span class="error-msg" data-th="กรุณากรอกปริมาณ" data-en="Please enter volume" data-zh="请输入使用量"></span>
+          </div>
+
+          <div class="field" id="f-food-origin">
+            <label class="field-label" for="foodOrigin">
+              <span data-th="สถานที่ตั้งต้นของสินค้า" data-en="Origin location of goods" data-zh="货物原产地"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="foodOrigin" name="foodOrigin" />
+            <span class="error-msg" data-th="กรุณากรอกสถานที่ตั้งต้น" data-en="Please enter origin location" data-zh="请输入原产地"></span>
+          </div>
+
+          <div class="field" id="f-food-storage-temp">
+            <label class="field-label" for="foodStorageTemp">
+              <span data-th="อุณหภูมิที่ต้องใช้ในการจัดเก็บ" data-en="Required storage temperature" data-zh="所需储存温度"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="foodStorageTemp" name="foodStorageTemp" />
+            <span class="error-msg" data-th="กรุณากรอกอุณหภูมิจัดเก็บ" data-en="Please enter storage temperature" data-zh="请输入储存温度"></span>
+          </div>
+
+          <div class="field" id="f-food-transport-temp">
+            <label class="field-label" for="foodTransportTemp">
+              <span data-th="อุณหภูมิที่ต้องใช้ในการขนส่ง" data-en="Required transport temperature" data-zh="所需运输温度"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="foodTransportTemp" name="foodTransportTemp" />
+            <span class="error-msg" data-th="กรุณากรอกอุณหภูมิขนส่ง" data-en="Please enter transport temperature" data-zh="请输入运输温度"></span>
+          </div>
+
+          <div class="field" id="f-food-destination">
+            <label class="field-label" for="foodDestination">
+              <span data-th="จุดหมายปลายทางของสินค้า" data-en="Destination of goods" data-zh="货物目的地"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="foodDestination" name="foodDestination" />
+            <span class="error-msg" data-th="กรุณากรอกจุดหมายปลายทาง" data-en="Please enter destination" data-zh="请输入目的地"></span>
+          </div>
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goBack(4)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
+          <button class="btn btn-primary" onclick="goNext(4)"><span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →</button>
+        </div>
+      </div>
+
+      <!-- PAGE 5: คำถามเพิ่มเติม -->
+      <div class="page" id="page5">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 4 จาก 4" data-en="Step 4 of 4" data-zh="第 4 步，共 4 步"></div>
+          <div class="page-title" data-th="คำถามเพิ่มเติม" data-en="Additional Questions" data-zh="附加问题"></div>
+        </div>
+        <div class="page-body">
+
+          <div class="field" id="f-referral">
+            <label class="field-label">
+              <span data-th="ท่านรู้จัก Cogistics ผ่านช่องทางใด" data-en="How did you hear about Cogistics?" data-zh="您如何了解到 Cogistics？"></span><span class="required-star">*</span>
+            </label>
+            <div class="options">
+              <label class="option-item" onclick="selectOption(this, 'referral', 'online')">
+                <input type="radio" name="referral" value="online" />
+                <div class="option-label" data-th="🔍 การค้นหาทางออนไลน์" data-en="🔍 Online search" data-zh="🔍 在线搜索"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'referral', 'recommend')">
+                <input type="radio" name="referral" value="recommend" />
+                <div class="option-label" data-th="👥 การแนะนำจากผู้อื่น" data-en="👥 Recommendation from others" data-zh="👥 他人推荐"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'referral', 'partner')">
+                <input type="radio" name="referral" value="partner" />
+                <div class="option-label" data-th="🤝 พันธมิตรหรือคู่ค้าปัจจุบัน" data-en="🤝 Current partner or associate" data-zh="🤝 现有合作伙伴"></div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'referral', 'other'); toggleOtherInput('referralOtherInput', document.querySelector('[name=referral][value=other]'))">
+                <input type="radio" name="referral" value="other" />
+                <div style="flex:1">
+                  <div class="option-label" data-th="อื่นๆ" data-en="Other" data-zh="其他"></div>
+                  <div class="other-input" id="referralOtherInput">
+                    <input type="text" id="referralOtherText" name="referralOtherText" style="margin-top:8px;" />
+                  </div>
+                </div>
+              </label>
+            </div>
+            <span class="error-msg" data-th="กรุณาเลือกช่องทาง" data-en="Please select how you heard about us" data-zh="请选择您了解我们的方式"></span>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="extraInfo">
+              <span data-th="ข้อมูลเพิ่มเติม (ถ้ามี)" data-en="Additional information (optional)" data-zh="其他信息（可选）"></span>
+            </label>
+            <textarea id="extraInfo" name="extraInfo" rows="4"></textarea>
+          </div>
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goBack(5)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
+          <button class="btn btn-submit" id="submitBtn" onclick="submitForm()">
+            <div class="spinner"></div>
+            <span class="btn-text" data-th="ส่งแบบฟอร์ม ✓" data-en="Submit Form ✓" data-zh="提交表单 ✓"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS PAGE -->
+      <div class="success-page" id="successPage">
+        <div class="success-icon">✓</div>
+        <div class="success-title" data-th="ขอบคุณสำหรับข้อมูลค่ะ" data-en="Thank you for your submission!" data-zh="感谢您的提交！"></div>
+        <div class="success-desc" data-th="ทีมงาน Cogistics ได้รับข้อมูลของท่านเรียบร้อยแล้ว และจะติดต่อกลับมาโดยเร็วที่สุดค่ะ" data-en="The Cogistics team has received your information and will get back to you as soon as possible." data-zh="Cogistics 团队已收到您的信息，将尽快与您联系。"></div>
+        <a href="https://cogistics.co.th" class="btn-website">
+          <span data-th="เยี่ยมชมเว็บไซต์ของเรา" data-en="Visit Our Website" data-zh="访问我们的网站"></span> →
+        </a>
+      </div>
+
+    </div><!-- /form-card -->
+
+    <div class="form-footer">
+      <span data-th="ข้อมูลของท่านจะถูกเก็บเป็นความลับและใช้เพื่อวัตถุประสงค์ในการให้บริการเท่านั้น" data-en="Your information is confidential and will only be used for service purposes." data-zh="您的信息将保密，仅用于服务目的。"></span>
+      <br/>© 2026 Cogistics Co., Ltd.
+    </div>
+  </main>
+
+<script>
+  // ── STATE ──
+  let currentLang = 'th';
+  let currentPage = 1;
+  let selectedSolution = null; // 'veggie' or 'food'
+
+  // ── LINE USER ID from URL ──
+  const urlParams = new URLSearchParams(window.location.search);
+  const lineUserId = urlParams.get('uid') || '';
+
+  // ── TRANSLATIONS ──
+  const T = {
+    progressLabels: {
+      th: ['ข้อมูลการติดต่อ', 'วัตถุประสงค์', 'ความต้องการ', 'คำถามเพิ่มเติม'],
+      en: ['Contact Info', 'Objective', 'Requirements', 'Additional'],
+      zh: ['联系信息', '目的', '需求', '附加问题'],
+    },
+    vegOtherPlaceholder: { th: 'โปรดระบุ...', en: 'Please specify...', zh: '请注明...' },
+  };
+
+  // ── LANG SWITCHER ──
+  function setLang(lang) {
+    currentLang = lang;
+    document.body.className = lang === 'zh' ? 'lang-zh' : '';
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    applyLang();
+  }
+
+  function applyLang() {
+    document.querySelectorAll('[data-th]').forEach(el => {
+      el.textContent = el.dataset[currentLang] || el.dataset.th;
+    });
+    document.querySelectorAll('input[type="text"], textarea').forEach(el => {
+      if (el.dataset[currentLang + 'Ph']) el.placeholder = el.dataset[currentLang + 'Ph'];
+    });
+    // update progress label
+    updateProgress();
+  }
+
+  // ── PROGRESS ──
+  function updateProgress() {
+    const labels = T.progressLabels[currentLang];
+    // Map logical pages to progress steps
+    const stepMap = { 1: 1, 2: 2, 3: 3, 4: 3, 5: 4 };
+    const step = stepMap[currentPage] || 1;
+
+    for (let i = 1; i <= 4; i++) {
+      const dot = document.getElementById(`dot${i}`);
+      const line = document.getElementById(`line${i}`);
+      dot.className = 'step-dot' + (i < step ? ' done' : i === step ? ' active' : '');
+      dot.textContent = i < step ? '✓' : i;
+      if (line) line.className = 'step-line' + (i < step ? ' done' : '');
+    }
+
+    document.getElementById('progressLabel').textContent = labels[step - 1] || '';
+  }
+
+  // ── OPTION SELECTION ──
+  function selectOption(el, name, value) {
+    document.querySelectorAll(`[name="${name}"]`).forEach(input => {
+      input.closest('.option-item')?.classList.remove('selected');
+    });
+    el.classList.add('selected');
+    const input = el.querySelector('input');
+    if (input) input.checked = true;
+
+    if (name === 'solution') selectedSolution = value;
+    clearError(el.closest('.field'));
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('selected', el.querySelector('input').checked);
+  }
+
+  function toggleOtherInput(inputId, checkbox) {
+    const wrap = document.getElementById(inputId);
+    if (!wrap) return;
+    if (checkbox && checkbox.checked) {
+      wrap.classList.add('visible');
+    } else {
+      wrap.classList.remove('visible');
+    }
+  }
+
+  // ── VALIDATION ──
+  function clearError(field) {
+    if (field) field.classList.remove('has-error');
+  }
+
+  function showError(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) field.classList.add('has-error');
+  }
+
+  function validatePage(pageNum) {
+    let valid = true;
+
+    if (pageNum === 1) {
+      ['f-company', 'f-contact', 'f-email', 'f-phone'].forEach(id => {
+        const field = document.getElementById(id);
+        const input = field?.querySelector('input');
+        if (!input?.value.trim()) { showError(id); valid = false; }
+        else clearError(field);
+      });
+      // email format
+      const email = document.getElementById('email');
+      if (email?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        showError('f-email'); valid = false;
+      }
+    }
+
+    if (pageNum === 2) {
+      if (!selectedSolution) { showError('f-solution'); valid = false; }
+    }
+
+    if (pageNum === 3) {
+      ['f-veg-product', 'f-veg-endproduct', 'f-veg-volume'].forEach(id => {
+        const field = document.getElementById(id);
+        const input = field?.querySelector('input');
+        if (!input?.value.trim()) { showError(id); valid = false; }
+        else clearError(field);
+      });
+    }
+
+    if (pageNum === 4) {
+      ['f-food-product', 'f-food-volume', 'f-food-origin', 'f-food-storage-temp', 'f-food-transport-temp', 'f-food-destination'].forEach(id => {
+        const field = document.getElementById(id);
+        const input = field?.querySelector('input');
+        if (!input?.value.trim()) { showError(id); valid = false; }
+        else clearError(field);
+      });
+      if (!document.querySelector('[name="foodType"]:checked')) {
+        showError('f-food-type'); valid = false;
+      }
+    }
+
+    if (pageNum === 5) {
+      if (!document.querySelector('[name="referral"]:checked')) {
+        showError('f-referral'); valid = false;
+      }
+    }
+
+    return valid;
+  }
+
+  // ── NAVIGATION ──
+  function goNext(fromPage) {
+    if (!validatePage(fromPage)) {
+      // scroll to first error
+      const firstError = document.querySelector(`#page${fromPage} .has-error`);
+      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    let nextPage;
+    if (fromPage === 2) {
+      nextPage = selectedSolution === 'veggie' ? 3 : 4;
+    } else if (fromPage === 3 || fromPage === 4) {
+      nextPage = 5;
+    } else {
+      nextPage = fromPage + 1;
+    }
+
+    showPage(nextPage);
+  }
+
+  function goBack(fromPage) {
+    let prevPage;
+    if (fromPage === 5) {
+      prevPage = selectedSolution === 'veggie' ? 3 : 4;
+    } else if (fromPage === 3 || fromPage === 4) {
+      prevPage = 2;
+    } else {
+      prevPage = fromPage - 1;
+    }
+    showPage(prevPage);
+  }
+
+  function showPage(pageNum) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(`page${pageNum}`)?.classList.add('active');
+    currentPage = pageNum;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── COLLECT FORM DATA ──
+  function collectData() {
+    const getVal = id => document.getElementById(id)?.value.trim() || '';
+    const getChecked = name => Array.from(document.querySelectorAll(`[name="${name}"]:checked`)).map(el => {
+      if (el.value === 'other') {
+        const otherText = el.closest('.option-item')?.querySelector('input[type="text"]')?.value.trim();
+        return otherText ? `อื่นๆ: ${otherText}` : 'อื่นๆ';
+      }
+      return el.value;
+    });
+
+    const solution = selectedSolution;
+    const referralVal = document.querySelector('[name="referral"]:checked')?.value || '';
+    const referralOther = getVal('referralOtherText');
+    const referral = referralVal === 'other' && referralOther ? `อื่นๆ: ${referralOther}` : referralVal;
+
+    const foodTypeVal = document.querySelector('[name="foodType"]:checked')?.value || '';
+    const foodTypeOther = getVal('foodTypeOtherText');
+    const foodType = foodTypeVal === 'other' && foodTypeOther ? `อื่นๆ: ${foodTypeOther}` : foodTypeVal;
+
+    return {
+      lineUserId,
+      // Page 1
+      company: getVal('company'),
+      contact: getVal('contact'),
+      email: getVal('email'),
+      phone: getVal('phone'),
+      // Page 2
+      solution,
+      // Page 3 (Veggie)
+      vegProduct: getVal('vegProduct'),
+      vegEndProduct: getVal('vegEndProduct'),
+      vegVolume: getVal('vegVolume'),
+      vegPainPoints: getChecked('vegPain').join(', '),
+      vegDetails: getVal('vegDetails'),
+      // Page 4 (Food)
+      foodProduct: getVal('foodProduct'),
+      foodType,
+      foodVolume: getVal('foodVolume'),
+      foodOrigin: getVal('foodOrigin'),
+      foodStorageTemp: getVal('foodStorageTemp'),
+      foodTransportTemp: getVal('foodTransportTemp'),
+      foodDestination: getVal('foodDestination'),
+      // Page 5
+      referral,
+      extraInfo: getVal('extraInfo'),
+    };
+  }
+
+  // ── SUBMIT ──
+  async function submitForm() {
+    if (!validatePage(5)) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+
+    const data = collectData();
+
+    try {
+      const response = await fetch('/form/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error('Server error');
+
+      // Show success
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('successPage').classList.add('active');
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      console.error('Submit error:', err);
+      btn.classList.remove('loading');
+      const errMsg = currentLang === 'th'
+        ? 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'
+        : currentLang === 'zh' ? '发生错误，请重试'
+        : 'An error occurred. Please try again.';
+      alert(errMsg);
+    }
+  }
+
+  // ── INIT ──
+  applyLang();
+  updateProgress();
+</script>
+</body>
+</html>

@@ -1,6 +1,16 @@
 import 'dotenv/config';
 import express from 'express';
 import { shouldSendForm, buildFormUrl, replyLineMessage } from './line.js';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.get('/form', (req, res) => {
+  const html = readFileSync(join(__dirname, '../public/form.html'), 'utf-8');
+  res.send(html);
+});
 
 const app = express();
 app.use(express.json());
