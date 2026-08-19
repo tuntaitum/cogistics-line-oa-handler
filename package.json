@@ -1,0 +1,9 @@
+{
+  "name": "cogistics-line-oa-handler",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "server": "node src/server.js"
+  }
+}

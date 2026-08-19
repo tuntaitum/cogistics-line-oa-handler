@@ -1,0 +1,45 @@
+import 'dotenv/config';
+import express from 'express';
+import { shouldSendForm, buildFormUrl, replyLineMessage } from './line.js';
+
+const app = express();
+app.use(express.json());
+
+app.get('/ping', (req, res) => {
+  res.json({ status: 'alive' });
+});
+
+app.post('/line-webhook', async (req, res) => {
+  // LINE requires immediate 200 response
+  res.status(200).json({ status: 'ok' });
+
+  const events = req.body?.events || [];
+  console.log(`Received ${events.length} LINE event(s)`);
+
+  for (const event of events) {
+    try {
+      const userId = event.source?.userId;
+      const replyToken = event.replyToken;
+
+      console.log('Event type:', event.type);
+      console.log('User ID:', userId);
+
+      if (!userId || !replyToken) continue;
+      if (!shouldSendForm(event)) continue;
+
+      const formUrl = buildFormUrl(userId);
+      console.log('Sending form URL:', formUrl);
+
+      await replyLineMessage(replyToken, formUrl);
+      console.log('Reply sent successfully');
+
+    } catch (error) {
+      console.error('Event error:', error.message);
+    }
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`LINE OA Handler running on port ${PORT}`);
+});
