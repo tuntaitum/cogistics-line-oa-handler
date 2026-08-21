@@ -7,16 +7,16 @@ import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.get('/form', (req, res) => {
-  const html = readFileSync(join(__dirname, '../public/form.html'), 'utf-8');
-  res.send(html);
-});
-
 const app = express();
 app.use(express.json());
 
 app.get('/ping', (req, res) => {
   res.json({ status: 'alive' });
+});
+
+app.get('/form', (req, res) => {
+  const html = readFileSync(join(__dirname, '../public/form.html'), 'utf-8');
+  res.send(html);
 });
 
 app.post('/line-webhook', async (req, res) => {
