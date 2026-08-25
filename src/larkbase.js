@@ -24,7 +24,7 @@ export async function saveVoiceRecord(formData) {
 
   const fields = {
     'Client': formData.company,
-    'ชื่อผู้ติดต่อ และตำแหน่ง': formData.contact,
+    'ชื่อผู้ติดต่อ': formData.contact,
     'อีเมลผู้ติดต่อ': formData.email,
     'เบอร์ผู้ติดต่อ': formData.phone,
     'Cogistics Solution': isVeggie ? 'Vegetable Industry Solutions' : 'Food Pipeline Solutions',
