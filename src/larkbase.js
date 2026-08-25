@@ -38,7 +38,7 @@ export async function saveVoiceRecord(formData) {
       'สินค้าที่กำลังตามหา': formData.vegProduct,
       'สินค้า End Product': formData.vegEndProduct,
       'ปริมาณการใช้งาน': formData.vegVolume,
-      'ปัญหาฝั่งลูกค้า': formData.vegPainPoints ? formData.vegPainPoints.split(', ') : [],
+      'ปัญหาฝั่งลูกค้า': formData.vegPainPoints,
       'อธิบาย Solution': formData.vegDetails,
     }),
     // 3PL fields
@@ -49,7 +49,7 @@ export async function saveVoiceRecord(formData) {
       '(3PL) สถานที่ตั้งต้นของสินค้า': formData.foodOrigin,
       '(3PL) อุณหภูมิที่ต้องใช้ในการจัดเก็บ': formData.foodStorageTemp,
       '(3PL) อุณหภูมิที่ต้องใช้ในการขนส่ง': formData.foodTransportTemp,
-      '(3PL) จุดหมายปลายทางของสินค้า': formData.foodEndpoints ? formData.foodEndpoints.split(', ') : [],
+      '(3PL) จุดหมายปลายทางของสินค้า': formData.foodEndpoints,
     }),
   };
 
