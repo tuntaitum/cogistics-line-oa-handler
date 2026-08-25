@@ -641,6 +641,48 @@
             <span class="error-msg" data-th="กรุณากรอกเบอร์ติดต่อ" data-en="Please enter your phone number" data-zh="请输入您的联系电话"></span>
           </div>
 
+          <div class="field" id="f-market">
+            <label class="field-label">
+              <span data-th="ตลาดของบริษัทท่าน" data-en="Your company's market" data-zh="贵公司的市场"></span><span class="required-star">*</span>
+              <span class="field-desc" style="display:block;margin-top:4px;" data-th="(เลือกได้มากกว่า 1 ข้อ)" data-en="(Select all that apply)" data-zh="（可多选）"></span>
+            </label>
+            <div class="options">
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="market" value="Convenience Stores/Modern Trades" />
+                <div class="option-label" data-th="🏪 Convenience Stores / Modern Trades" data-en="🏪 Convenience Stores / Modern Trades" data-zh="🏪 便利店 / 现代贸易"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="market" value="Quick Service Restaurant" />
+                <div class="option-label" data-th="🍔 Quick Service Restaurant (QSR)" data-en="🍔 Quick Service Restaurant (QSR)" data-zh="🍔 快餐连锁"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="market" value="Import" />
+                <div class="option-label" data-th="📦 Import" data-en="📦 Import" data-zh="📦 进口"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="market" value="Export" />
+                <div class="option-label" data-th="✈️ Export" data-en="✈️ Export" data-zh="✈️ 出口"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="market" value="Air Catering" />
+                <div class="option-label" data-th="✈️ Air Catering" data-en="✈️ Air Catering" data-zh="✈️ 航空餐饮"></div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="market" value="E-commerce" />
+                <div class="option-label" data-th="🛒 E-commerce" data-en="🛒 E-commerce" data-zh="🛒 电子商务"></div>
+              </label>
+            </div>
+            <span class="error-msg" data-th="กรุณาเลือกตลาดอย่างน้อย 1 ข้อ" data-en="Please select at least one market" data-zh="请至少选择一个市场"></span>
+          </div>
+
+          <div class="field" id="f-main-product">
+            <label class="field-label" for="mainProduct">
+              <span data-th="สินค้าหลักของบริษัทท่าน" data-en="Main product of your company" data-zh="贵公司的主要产品"></span><span class="required-star">*</span>
+            </label>
+            <input type="text" id="mainProduct" name="mainProduct" />
+            <span class="error-msg" data-th="กรุณากรอกสินค้าหลัก" data-en="Please enter your main product" data-zh="请输入主要产品"></span>
+          </div>
+
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="goNext(1)">
@@ -850,12 +892,75 @@
             <span class="error-msg" data-th="กรุณากรอกอุณหภูมิขนส่ง" data-en="Please enter transport temperature" data-zh="请输入运输温度"></span>
           </div>
 
-          <div class="field" id="f-food-destination">
-            <label class="field-label" for="foodDestination">
-              <span data-th="จุดหมายปลายทางของสินค้า" data-en="Destination of goods" data-zh="货物目的地"></span><span class="required-star">*</span>
+          <div class="field" id="f-food-endpoints">
+            <label class="field-label">
+              <span data-th="จุดกระจายสินค้าของท่าน" data-en="Your distribution endpoints" data-zh="您的配送终点"></span><span class="required-star">*</span>
+              <span class="field-desc" style="display:block;margin-top:4px;" data-th="(เลือกได้มากกว่า 1 ข้อ)" data-en="(Select all that apply)" data-zh="（可多选）"></span>
             </label>
-            <input type="text" id="foodDestination" name="foodDestination" />
-            <span class="error-msg" data-th="กรุณากรอกจุดหมายปลายทาง" data-en="Please enter destination" data-zh="请输入目的地"></span>
+            <div class="options">
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="7-Eleven" />
+                <div class="option-label">7-Eleven</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Makro" />
+                <div class="option-label">Makro</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Tesco Lotus" />
+                <div class="option-label">Tesco Lotus</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="CJ More/CJ Express" />
+                <div class="option-label">CJ More/CJ Express</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Big C" />
+                <div class="option-label">Big C</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Villa Market" />
+                <div class="option-label">Villa Market</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Tops Market" />
+                <div class="option-label">Tops Market</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Gourmet Market" />
+                <div class="option-label">Gourmet Market</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Foodland" />
+                <div class="option-label">Foodland</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="MaxValu" />
+                <div class="option-label">MaxValu</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="Lawson 108" />
+                <div class="option-label">Lawson 108</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="FamilyMart" />
+                <div class="option-label">FamilyMart</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="endpoints" value="CPRAM" />
+                <div class="option-label">CPRAM</div>
+              </label>
+              <label class="option-item" onclick="toggleCheck(this)" id="endpoint-other-item">
+                <input type="checkbox" name="endpoints" value="other" onchange="toggleOtherInput('endpointOtherInput', this)" />
+                <div style="flex:1">
+                  <div class="option-label" data-th="อื่นๆ" data-en="Other" data-zh="其他"></div>
+                  <div class="other-input" id="endpointOtherInput">
+                    <input type="text" id="endpointOtherText" name="endpointOtherText" style="margin-top:8px;" />
+                  </div>
+                </div>
+              </label>
+            </div>
+            <span class="error-msg" data-th="กรุณาเลือกอย่างน้อย 1 จุดกระจายสินค้า" data-en="Please select at least one endpoint" data-zh="请至少选择一个配送终点"></span>
           </div>
 
         </div>
@@ -1037,12 +1142,15 @@
     let valid = true;
 
     if (pageNum === 1) {
-      ['f-company', 'f-contact', 'f-email', 'f-phone'].forEach(id => {
+      ['f-company', 'f-contact', 'f-email', 'f-phone', 'f-main-product'].forEach(id => {
         const field = document.getElementById(id);
         const input = field?.querySelector('input');
         if (!input?.value.trim()) { showError(id); valid = false; }
         else clearError(field);
       });
+      if (!document.querySelector('[name="market"]:checked')) {
+        showError('f-market'); valid = false;
+      }
       // email format
       const email = document.getElementById('email');
       if (email?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
@@ -1064,7 +1172,7 @@
     }
 
     if (pageNum === 4) {
-      ['f-food-product', 'f-food-volume', 'f-food-origin', 'f-food-storage-temp', 'f-food-transport-temp', 'f-food-destination'].forEach(id => {
+      ['f-food-product', 'f-food-volume', 'f-food-origin', 'f-food-storage-temp', 'f-food-transport-temp'].forEach(id => {
         const field = document.getElementById(id);
         const input = field?.querySelector('input');
         if (!input?.value.trim()) { showError(id); valid = false; }
@@ -1072,6 +1180,10 @@
       });
       if (!document.querySelector('[name="foodType"]:checked')) {
         showError('f-food-type'); valid = false;
+      }
+      // endpoints validation
+      if (!document.querySelector('[name="endpoints"]:checked')) {
+        showError('f-food-endpoints'); valid = false;
       }
     }
 
@@ -1152,6 +1264,8 @@
       contact: getVal('contact'),
       email: getVal('email'),
       phone: getVal('phone'),
+      market: getChecked('market').join(', '),
+      mainProduct: getVal('mainProduct'),
       // Page 2
       solution,
       // Page 3 (Veggie)
@@ -1167,7 +1281,7 @@
       foodOrigin: getVal('foodOrigin'),
       foodStorageTemp: getVal('foodStorageTemp'),
       foodTransportTemp: getVal('foodTransportTemp'),
-      foodDestination: getVal('foodDestination'),
+      foodEndpoints: getChecked('endpoints').join(', '),
       // Page 5
       referral,
       extraInfo: getVal('extraInfo'),
