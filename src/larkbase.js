@@ -53,7 +53,10 @@ export async function saveVoiceRecord(formData) {
     }),
   };
 
-  console.log('Fields being sent:', JSON.stringify(fields, null, 2));
+  const fieldsJson = JSON.stringify(fields, null, 2);
+  console.log('Fields length:', fieldsJson.length);
+  console.log('Fields part 1:', fieldsJson.substring(0, 1000));
+  console.log('Fields part 2:', fieldsJson.substring(1000));
   const response = await fetch(`https://open.larksuite.com/open-apis/bitable/v1/apps/${BASE_APP_TOKEN}/tables/${VOICE_DATA_TABLE_ID}/records`, {
     method: 'POST',
     headers: {
@@ -63,8 +66,9 @@ export async function saveVoiceRecord(formData) {
     body: JSON.stringify({ fields }),
   });
 
-  const data = await response.json();
-  console.log('Lark Base save response:', JSON.stringify(data, null, 2));
+  const responseText = await response.text();
+  console.log('Full Lark response:', responseText);
+  const data = JSON.parse(responseText);
 
   if (data.code !== 0) throw new Error(`Failed to save record: ${data.msg}`);
   return data.data?.record?.record_id;
