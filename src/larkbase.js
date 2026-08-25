@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 const BASE_APP_TOKEN = 'Vy7sbAtPnawdOXsK9tMlqlq3gGg';
-const VOICE_DATA_TABLE_ID = 'tblKp0JCK0qhd22y';
+const VOICE_DATA_TABLE_ID = 'tblxoutA6d73t44m';
 
 async function getTenantAccessToken() {
   const response = await fetch('https://open.larksuite.com/open-apis/auth/v3/tenant_access_token/internal/', {
