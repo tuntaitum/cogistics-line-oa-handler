@@ -44,3 +44,30 @@ export async function replyLineMessage(replyToken, formUrl) {
 
   return data;
 }
+
+export async function sendThankYouMessage(lineUserId, contact, company) {
+  if (!lineUserId) {
+    console.log('No LINE ID — skipping thank you message');
+    return;
+  }
+
+  const response = await fetch('https://api.line.me/v2/bot/message/push', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.LINE_CHANNEL_ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      to: lineUserId,
+      messages: [
+        {
+          type: 'text',
+          text: `ขอบคุณ คุณ${contact} ที่กรอกฟอร์มมาในนามของ${company} ค่ะ จะมีทีมงานติดต่อกลับมาอีกทีนะคะ`,
+        }
+      ],
+    }),
+  });
+
+  const data = await response.json();
+  console.log('Thank you message response:', JSON.stringify(data, null, 2));
+}
