@@ -60,7 +60,7 @@ export async function sendThankYouMessage(lineUserId, contact, company) {
       messages: [
         {
           type: 'text',
-          text: `ขอบคุณ คุณ${contact} ที่กรอกฟอร์มมาในนามของ${company} ค่ะ จะมีทีมงานติดต่อกลับมาอีกทีนะคะ`,
+          text: `ขอบคุณ คุณ ${contact} ที่กรอกฟอร์มมาในนามของ ${company} ค่ะ จะมีทีมงานติดต่อกลับมาอีกทีนะคะ`,
         }
       ],
     }),
