@@ -53,6 +53,7 @@ export async function saveVoiceRecord(formData) {
     }),
   };
 
+  console.log('Fields being sent:', JSON.stringify(fields, null, 2));
   const response = await fetch(`https://open.larksuite.com/open-apis/bitable/v1/apps/${BASE_APP_TOKEN}/tables/${VOICE_DATA_TABLE_ID}/records`, {
     method: 'POST',
     headers: {
