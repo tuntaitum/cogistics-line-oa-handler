@@ -1,5 +1,3 @@
-const FORM_URL_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSfFuPT4v-FU5xHs-fK9vZqDVRhZoaOxsXu3bUPRcRgnBV3f4A/viewform?usp=pp_url&entry.2046907294=';
-
 const FORM_TRIGGER_WORDS = ['form', 'แบบฟอร์ม', 'ฟอร์ม'];
 
 export function shouldSendForm(event) {
@@ -14,7 +12,7 @@ export function shouldSendForm(event) {
 }
 
 export function buildFormUrl(userId) {
-  return FORM_URL_BASE + encodeURIComponent(userId);
+  return `https://form.cogistics.co.th/form?uid=${encodeURIComponent(userId)}`;
 }
 
 export async function replyLineMessage(replyToken, formUrl) {
