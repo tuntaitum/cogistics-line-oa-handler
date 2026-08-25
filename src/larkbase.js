@@ -13,6 +13,7 @@ async function getTenantAccessToken() {
     }),
   });
   const data = await response.json();
+  console.log('Token response:', JSON.stringify(data, null, 2)); // add this
   if (data.code !== 0) throw new Error(`Failed to get tenant token: ${data.msg}`);
   return data.tenant_access_token;
 }
