@@ -21,6 +21,10 @@ app.get('/ping', (req, res) => {
 
 });
 
+app.get('/', (req, res) => {
+  res.redirect('/form');
+});
+
 app.get('/form', (req, res) => {
 
   const html = readFileSync(join(__dirname, '../public/form.html'), 'utf-8');
