@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { saveVoiceRecord } from './larkbase.js';
-import { sendThankYouMessage } from './line.js';
+import { shouldSendForm, buildFormUrl, replyLineMessage, sendThankYouMessage } from './line.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -27,6 +27,25 @@ app.get('/form', (req, res) => {
 
   res.send(html);
 
+});
+
+app.post('/form/submit', async (req, res) => {
+  console.log('Form submit received');
+  res.status(200).json({ success: true });
+
+  const formData = req.body;
+  console.log('Submission:', formData.company, '|', formData.solution);
+
+  try {
+    await Promise.all([
+      saveVoiceRecord(formData),
+      sendThankYouMessage(formData.lineUserId, formData.contact, formData.company),
+    ]);
+    console.log('Form submission processed successfully');
+  } catch (error) {
+    console.error('Form submission error:', error.message);
+    console.error('Stack:', error.stack);
+  }
 });
 
 app.post('/line-webhook', async (req, res) => {
