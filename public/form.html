@@ -309,7 +309,7 @@
       background: var(--white);
       transition: border-color 0.18s, box-shadow 0.18s;
       outline: none;
-      -webkit-appearance: none;
+      resize: vertical;
     }
 
     .field input:focus,
@@ -769,19 +769,19 @@
             </label>
             <div class="options">
               <label class="option-item" onclick="toggleCheck(this)">
-                <input type="checkbox" name="vegPain" value="npd" />
+                <input type="checkbox" name="vegPain" value="การพัฒนาสินค้าใหม่ (NPD)" />
                 <div class="option-label" data-th="การพัฒนาสินค้าใหม่ (NPD)" data-en="New Product Development (NPD)" data-zh="新产品开发 (NPD)"></div>
               </label>
               <label class="option-item" onclick="toggleCheck(this)">
-                <input type="checkbox" name="vegPain" value="supply" />
+                <input type="checkbox" name="vegPain" value="สินค้าขาดตลาด / ซัพพลายไม่สม่ำเสมอ" />
                 <div class="option-label" data-th="สินค้าขาดตลาด / ซัพพลายไม่สม่ำเสมอ" data-en="Supply shortage / Inconsistent supply" data-zh="供应短缺/供应不稳定"></div>
               </label>
               <label class="option-item" onclick="toggleCheck(this)">
-                <input type="checkbox" name="vegPain" value="second" />
+                <input type="checkbox" name="vegPain" value="ต้องการหาซัพพลายเออร์รายที่สอง" />
                 <div class="option-label" data-th="ต้องการหาซัพพลายเออร์รายที่สอง" data-en="Looking for a second supplier" data-zh="寻找第二供应商"></div>
               </label>
               <label class="option-item" onclick="toggleCheck(this)">
-                <input type="checkbox" name="vegPain" value="cost" />
+                <input type="checkbox" name="vegPain" value="ปัญหาด้านต้นทุนหรือคุณภาพ" />
                 <div class="option-label" data-th="ปัญหาด้านต้นทุนหรือคุณภาพ" data-en="Cost or quality inconsistency" data-zh="成本或质量问题"></div>
               </label>
               <label class="option-item" onclick="toggleCheck(this)" id="veg-other-item">
