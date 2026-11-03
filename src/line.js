@@ -1,6 +1,11 @@
-const FORM_TRIGGER_WORDS = ['form', 'แบบฟอร์ม', 'ฟอร์ม'];
+const FORM_TRIGGER_WORDS = ['form', 'ฟอร์ม'];
 
 export function shouldSendForm(event) {
+  
+  if (event.source?.type !== 'user') {
+    return false; // Only respond to user messages, not group or room messages
+  }
+  
   const isFollow = event.type === 'follow';
   const isFormRequest = event.type === 'message' &&
     event.message?.type === 'text' &&
