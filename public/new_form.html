@@ -60,10 +60,47 @@
   <main class="main">
     <div class="form-card" id="formCard">
 
-      <!-- PAGE 1: ข้อมูลการติดต่อ -->
+      <!-- PAGE 1: วัตถุประสงค์ -->
       <div class="page active" id="page1">
         <div class="page-header">
           <div class="page-number" data-th="ขั้นตอนที่ 1 จาก 4" data-en="Step 1 of 4" data-zh="第 1 步，共 4 步"></div>
+          <div class="page-title" data-th="วัตถุประสงค์ในการใช้บริการ" data-en="Service Objective" data-zh="服务目的"></div>
+        </div>
+        <div class="page-body">
+
+          <div class="field" id="f-solution">
+            <label class="field-label">
+              <span data-th="วัตถุประสงค์หลักของท่าน และสิ่งที่ต้องการให้ Cogistics ช่วยดูแล" data-en="Your main objective and what you need Cogistics to help with" data-zh="您的主要目标以及您需要 Cogistics 帮助的内容"></span><span class="required-star">*</span>
+            </label>
+            <div class="options">
+              <label class="option-item" onclick="selectOption(this, 'solution', 'veggie')">
+                <input type="radio" name="solution" value="veggie" />
+                <div>
+                  <div class="option-label" data-th="🥬 Vegetable Industry Solutions" data-en="🥬 Vegetable Industry Solutions" data-zh="🥬 蔬菜行业解决方案"></div>
+                  <div class="option-sub" data-th="การจัดหาวัตถุดิบ ผักผลไม้สด/แช่แข็งเพื่อภาคอุตสาหกรรม" data-en="Sourcing fresh/frozen vegetables and fruits for the industrial sector" data-zh="为工业部门采购新鲜/冷冻蔬菜和水果"></div>
+                </div>
+              </label>
+              <label class="option-item" onclick="selectOption(this, 'solution', 'food')">
+                <input type="radio" name="solution" value="food" />
+                <div>
+                  <div class="option-label" data-th="🚚 Food Pipeline Solutions" data-en="🚚 Food Pipeline Solutions" data-zh="🚚 食品供应链解决方案"></div>
+                  <div class="option-sub" data-th="การจัดเก็บและกระจายสินค้าตามโจทย์ของลูกค้า" data-en="Storage and distribution of goods according to client requirements" data-zh="根据客户要求进行货物储存和配送"></div>
+                </div>
+              </label>
+            </div>
+            <span class="error-msg" data-th="กรุณาเลือกวัตถุประสงค์" data-en="Please select an objective" data-zh="请选择目标"></span>
+          </div>
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="goNext(1)"><span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →</button>
+        </div>
+      </div>
+
+      <!-- PAGE 2: ข้อมูลการติดต่อ -->
+      <div class="page" id="page2">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 4" data-en="Step 2 of 4" data-zh="第 2 步，共 4 步"></div>
           <div class="page-title" data-th="ข้อมูลการติดต่อ" data-en="Contact Information" data-zh="联系信息"></div>
         </div>
         <div class="page-body">
@@ -144,47 +181,10 @@
 
         </div>
         <div class="btn-row">
-          <button class="btn btn-primary" onclick="goNext(1)">
+          <button class="btn btn-secondary" onclick="goBack(2)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
+          <button class="btn btn-primary" onclick="goNext(2)">
             <span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →
           </button>
-        </div>
-      </div>
-
-      <!-- PAGE 2: วัตถุประสงค์ -->
-      <div class="page" id="page2">
-        <div class="page-header">
-          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 4" data-en="Step 2 of 4" data-zh="第 2 步，共 4 步"></div>
-          <div class="page-title" data-th="วัตถุประสงค์ในการใช้บริการ" data-en="Service Objective" data-zh="服务目的"></div>
-        </div>
-        <div class="page-body">
-
-          <div class="field" id="f-solution">
-            <label class="field-label">
-              <span data-th="วัตถุประสงค์หลักของท่าน และสิ่งที่ต้องการให้ Cogistics ช่วยดูแล" data-en="Your main objective and what you need Cogistics to help with" data-zh="您的主要目标以及您需要 Cogistics 帮助的内容"></span><span class="required-star">*</span>
-            </label>
-            <div class="options">
-              <label class="option-item" onclick="selectOption(this, 'solution', 'veggie')">
-                <input type="radio" name="solution" value="veggie" />
-                <div>
-                  <div class="option-label" data-th="🥬 Vegetable Industry Solutions" data-en="🥬 Vegetable Industry Solutions" data-zh="🥬 蔬菜行业解决方案"></div>
-                  <div class="option-sub" data-th="การจัดหาวัตถุดิบ ผักผลไม้สด/แช่แข็งเพื่อภาคอุตสาหกรรม" data-en="Sourcing fresh/frozen vegetables and fruits for the industrial sector" data-zh="为工业部门采购新鲜/冷冻蔬菜和水果"></div>
-                </div>
-              </label>
-              <label class="option-item" onclick="selectOption(this, 'solution', 'food')">
-                <input type="radio" name="solution" value="food" />
-                <div>
-                  <div class="option-label" data-th="🚚 Food Pipeline Solutions" data-en="🚚 Food Pipeline Solutions" data-zh="🚚 食品供应链解决方案"></div>
-                  <div class="option-sub" data-th="การจัดเก็บและกระจายสินค้าตามโจทย์ของลูกค้า" data-en="Storage and distribution of goods according to client requirements" data-zh="根据客户要求进行货物储存和配送"></div>
-                </div>
-              </label>
-            </div>
-            <span class="error-msg" data-th="กรุณาเลือกวัตถุประสงค์" data-en="Please select an objective" data-zh="请选择目标"></span>
-          </div>
-
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goBack(2)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
-          <button class="btn btn-primary" onclick="goNext(2)"><span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →</button>
         </div>
       </div>
 
@@ -515,9 +515,9 @@
   // ── TRANSLATIONS ──
   const T = {
     progressLabels: {
-      th: ['ข้อมูลการติดต่อ', 'วัตถุประสงค์', 'ความต้องการ', 'คำถามเพิ่มเติม'],
-      en: ['Contact Info', 'Objective', 'Requirements', 'Additional'],
-      zh: ['联系信息', '目的', '需求', '附加问题'],
+      th: ['วัตถุประสงค์', 'ข้อมูลการติดต่อ', 'ความต้องการ', 'คำถามเพิ่มเติม'],
+      en: ['Objective', 'Contact Info', 'Requirements', 'Additional'],
+      zh: ['目的', '联系信息', '需求', '附加问题'],
     },
     vegOtherPlaceholder: { th: 'โปรดระบุ...', en: 'Please specify...', zh: '请注明...' },
   };
@@ -600,7 +600,7 @@
   function validatePage(pageNum) {
     let valid = true;
 
-    if (pageNum === 1) {
+    if (pageNum === 2) {
       ['f-company', 'f-contact', 'f-email', 'f-phone', 'f-main-product'].forEach(id => {
         const field = document.getElementById(id);
         const input = field?.querySelector('input');
@@ -617,7 +617,7 @@
       }
     }
 
-    if (pageNum === 2) {
+    if (pageNum === 1) {
       if (!selectedSolution) { showError('f-solution'); valid = false; }
     }
 
@@ -718,14 +718,14 @@
 
     return {
       lineUserId,
-      // Page 1
+      // Page 2
       company: getVal('company'),
       contact: getVal('contact'),
       email: getVal('email'),
       phone: getVal('phone'),
       market: getChecked('market').join(', '),
       mainProduct: getVal('mainProduct'),
-      // Page 2
+      // Page 1
       solution,
       // Page 3 (Veggie)
       vegProduct: getVal('vegProduct'),
