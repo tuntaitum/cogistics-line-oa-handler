@@ -46,10 +46,6 @@
         </div>
         <div class="progress-step">
           <div class="step-dot" id="dot3">3</div>
-          <div class="step-line" id="line3"></div>
-        </div>
-        <div class="progress-step">
-          <div class="step-dot" id="dot4">4</div>
         </div>
       </div>
       <div class="progress-label" id="progressLabel"></div>
@@ -63,7 +59,7 @@
       <!-- PAGE 1: วัตถุประสงค์ -->
       <div class="page active" id="page1">
         <div class="page-header">
-          <div class="page-number" data-th="ขั้นตอนที่ 1 จาก 4" data-en="Step 1 of 4" data-zh="第 1 步，共 4 步"></div>
+          <div class="page-number" data-th="ขั้นตอนที่ 1 จาก 2" data-en="Step 1 of 2" data-zh="第 1 步，共 2 步"></div>
           <div class="page-title" data-th="วัตถุประสงค์ในการใช้บริการ" data-en="Service Objective" data-zh="服务目的"></div>
         </div>
         <div class="page-body">
@@ -100,7 +96,7 @@
       <!-- PAGE 2: ข้อมูลการติดต่อ -->
       <div class="page" id="page2">
         <div class="page-header">
-          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 4" data-en="Step 2 of 4" data-zh="第 2 步，共 4 步"></div>
+          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 2" data-en="Step 2 of 2" data-zh="第 2 步，共 2 步"></div>
           <div class="page-title" data-th="ข้อมูลการติดต่อ" data-en="Contact Information" data-zh="联系信息"></div>
         </div>
         <div class="page-body">
@@ -137,6 +133,35 @@
             <span class="error-msg" data-th="กรุณากรอกเบอร์ติดต่อ" data-en="Please enter your phone number" data-zh="请输入您的联系电话"></span>
           </div>
 
+
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="goBack(2)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
+          <button class="btn btn-primary" id="saveContactBtn" onclick="saveContact()">
+            <span data-th="ส่งข้อมูลติดต่อ" data-en="Submit contact details" data-zh="提交联系信息"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="page" id="page7">
+        <div class="page-header">
+          <div class="page-title" data-th="เราได้รับข้อมูลติดต่อของท่านแล้ว" data-en="We’ve received your contact details" data-zh="我们已收到您的联系信息"></div>
+        </div>
+        <div class="page-body">
+          <p data-th="ทีมงาน Cogistics จะติดต่อกลับ ท่านสามารถเพิ่มรายละเอียดความต้องการได้เลย" data-en="Our team will follow up. You can also tell us more about what you need now." data-zh="Cogistics 团队将与您联系。您也可以现在补充需求详情。"></p>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="showSuccess()" data-th="เสร็จสิ้น" data-en="Done" data-zh="完成"></button>
+          <button class="btn btn-primary" onclick="showPage(6)" data-th="เพิ่มรายละเอียดความต้องการ" data-en="Add requirements" data-zh="补充需求"></button>
+        </div>
+      </div>
+
+      <div class="page" id="page6">
+        <div class="page-header">
+          <div class="page-number" data-th="ขั้นตอนที่ 1 จาก 3" data-en="Step 1 of 3" data-zh="第 1 步，共 3 步"></div>
+          <div class="page-title" data-th="ข้อมูลบริษัทเพิ่มเติม" data-en="Company profile" data-zh="公司简介"></div>
+        </div>
+        <div class="page-body">
           <div class="field" id="f-market">
             <label class="field-label">
               <span data-th="ตลาดของบริษัทท่าน" data-en="Your company's market" data-zh="贵公司的市场"></span><span class="required-star">*</span>
@@ -181,17 +206,15 @@
 
         </div>
         <div class="btn-row">
-          <button class="btn btn-secondary" onclick="goBack(2)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
-          <button class="btn btn-primary" onclick="goNext(2)">
-            <span data-th="ถัดไป" data-en="Next" data-zh="下一步"></span> →
-          </button>
+          <button class="btn btn-secondary" onclick="goBack(6)" data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></button>
+          <button class="btn btn-primary" onclick="goNext(6)" data-th="ถัดไป" data-en="Next" data-zh="下一步"></button>
         </div>
       </div>
 
       <!-- PAGE 3: Vegetable Industry Solutions -->
       <div class="page" id="page3">
         <div class="page-header">
-          <div class="page-number" data-th="ขั้นตอนที่ 3 จาก 4" data-en="Step 3 of 4" data-zh="第 3 步，共 4 步"></div>
+          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 3" data-en="Step 2 of 3" data-zh="第 2 步，共 3 步"></div>
           <div class="page-title" data-th="ข้อมูลความต้องการ — Vegetable Industry Solutions" data-en="Requirements — Vegetable Industry Solutions" data-zh="需求信息 — 蔬菜行业解决方案"></div>
         </div>
         <div class="page-body">
@@ -272,7 +295,7 @@
       <!-- PAGE 4: Food Pipeline Solutions -->
       <div class="page" id="page4">
         <div class="page-header">
-          <div class="page-number" data-th="ขั้นตอนที่ 3 จาก 4" data-en="Step 3 of 4" data-zh="第 3 步，共 4 步"></div>
+          <div class="page-number" data-th="ขั้นตอนที่ 2 จาก 3" data-en="Step 2 of 3" data-zh="第 2 步，共 3 步"></div>
           <div class="page-title" data-th="ข้อมูลความต้องการ — Food Pipeline Solutions" data-en="Requirements — Food Pipeline Solutions" data-zh="需求信息 — 食品供应链解决方案"></div>
         </div>
         <div class="page-body">
@@ -432,7 +455,7 @@
       <!-- PAGE 5: คำถามเพิ่มเติม -->
       <div class="page" id="page5">
         <div class="page-header">
-          <div class="page-number" data-th="ขั้นตอนที่ 4 จาก 4" data-en="Step 4 of 4" data-zh="第 4 步，共 4 步"></div>
+          <div class="page-number" data-th="ขั้นตอนที่ 3 จาก 3" data-en="Step 3 of 3" data-zh="第 3 步，共 3 步"></div>
           <div class="page-title" data-th="คำถามเพิ่มเติม" data-en="Additional Questions" data-zh="附加问题"></div>
         </div>
         <div class="page-body">
@@ -479,7 +502,7 @@
           <button class="btn btn-secondary" onclick="goBack(5)">← <span data-th="ย้อนกลับ" data-en="Back" data-zh="返回"></span></button>
           <button class="btn btn-submit" id="submitBtn" onclick="submitForm()">
             <div class="spinner"></div>
-            <span class="btn-text" data-th="ส่งแบบฟอร์ม ✓" data-en="Submit Form ✓" data-zh="提交表单 ✓"></span>
+            <span class="btn-text" data-th="บันทึกรายละเอียด ✓" data-en="Save details ✓" data-zh="保存详情 ✓"></span>
           </button>
         </div>
       </div>
@@ -506,6 +529,8 @@
   // ── STATE ──
   let currentLang = 'th';
   let currentPage = 1;
+  let draftToken;
+  let contactRequest;
   let selectedSolution = null; // 'veggie' or 'food'
 
   // ── LINE USER ID from URL ──
@@ -515,9 +540,9 @@
   // ── TRANSLATIONS ──
   const T = {
     progressLabels: {
-      th: ['วัตถุประสงค์', 'ข้อมูลการติดต่อ', 'ความต้องการ', 'คำถามเพิ่มเติม'],
-      en: ['Objective', 'Contact Info', 'Requirements', 'Additional'],
-      zh: ['目的', '联系信息', '需求', '附加问题'],
+      th: ['วัตถุประสงค์', 'ข้อมูลการติดต่อ', 'ข้อมูลบริษัทเพิ่มเติม', 'ความต้องการ', 'คำถามเพิ่มเติม'],
+      en: ['Objective', 'Contact Info', 'Company Profile', 'Requirements', 'Additional'],
+      zh: ['目的', '联系信息', '公司简介', '需求', '附加问题'],
     },
     vegOtherPlaceholder: { th: 'โปรดระบุ...', en: 'Please specify...', zh: '请注明...' },
   };
@@ -544,12 +569,16 @@
 
   // ── PROGRESS ──
   function updateProgress() {
-    const labels = T.progressLabels[currentLang];
-    // Map logical pages to progress steps
-    const stepMap = { 1: 1, 2: 2, 3: 3, 4: 3, 5: 4 };
-    const step = stepMap[currentPage] || 1;
+    const stepMap = { 1: 1, 2: 2, 6: 1, 3: 2, 4: 2, 5: 3 };
+    const step = stepMap[currentPage];
+    document.querySelector('.progress-wrap').hidden = !step;
+    if (!step) return;
 
-    for (let i = 1; i <= 4; i++) {
+    const isContactStage = currentPage <= 2;
+    const labels = T.progressLabels[currentLang].slice(isContactStage ? 0 : 2);
+    document.getElementById('dot3').parentElement.style.display = isContactStage ? 'none' : '';
+    document.getElementById('line2').style.display = isContactStage ? 'none' : '';
+    for (let i = 1; i <= labels.length; i++) {
       const dot = document.getElementById(`dot${i}`);
       const line = document.getElementById(`line${i}`);
       dot.className = 'step-dot' + (i < step ? ' done' : i === step ? ' active' : '');
@@ -601,15 +630,12 @@
     let valid = true;
 
     if (pageNum === 2) {
-      ['f-company', 'f-contact', 'f-email', 'f-phone', 'f-main-product'].forEach(id => {
+      ['f-company', 'f-contact', 'f-email', 'f-phone'].forEach(id => {
         const field = document.getElementById(id);
         const input = field?.querySelector('input');
         if (!input?.value.trim()) { showError(id); valid = false; }
         else clearError(field);
       });
-      if (!document.querySelector('[name="market"]:checked')) {
-        showError('f-market'); valid = false;
-      }
       // email format
       const email = document.getElementById('email');
       if (email?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
@@ -619,6 +645,19 @@
 
     if (pageNum === 1) {
       if (!selectedSolution) { showError('f-solution'); valid = false; }
+    }
+
+    if (pageNum === 6) {
+      const market = document.getElementById('f-market');
+      const product = document.getElementById('f-main-product');
+      clearError(market);
+      clearError(product);
+      if (!document.querySelector('[name="market"]:checked')) {
+        showError('f-market'); valid = false;
+      }
+      if (!document.getElementById('mainProduct').value.trim()) {
+        showError('f-main-product'); valid = false;
+      }
     }
 
     if (pageNum === 3) {
@@ -665,7 +704,7 @@
     }
 
     let nextPage;
-    if (fromPage === 2) {
+    if (fromPage === 6) {
       nextPage = selectedSolution === 'veggie' ? 3 : 4;
     } else if (fromPage === 3 || fromPage === 4) {
       nextPage = 5;
@@ -681,7 +720,9 @@
     if (fromPage === 5) {
       prevPage = selectedSolution === 'veggie' ? 3 : 4;
     } else if (fromPage === 3 || fromPage === 4) {
-      prevPage = 2;
+      prevPage = 6;
+    } else if (fromPage === 6) {
+      prevPage = 7;
     } else {
       prevPage = fromPage - 1;
     }
@@ -718,11 +759,12 @@
 
     return {
       lineUserId,
-      // Page 2
+      // Contact details
       company: getVal('company'),
       contact: getVal('contact'),
       email: getVal('email'),
       phone: getVal('phone'),
+      // Company profile
       market: getChecked('market').join(', '),
       mainProduct: getVal('mainProduct'),
       // Page 1
@@ -747,38 +789,80 @@
     };
   }
 
+  function showSuccess() {
+    showPage(0);
+    document.getElementById('successPage').classList.add('active');
+  }
+
+  async function saveContact() {
+    if (!validatePage(2)) {
+      document.querySelector('#page2 .has-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = document.getElementById('saveContactBtn');
+    if (btn.disabled) return;
+    const back = document.querySelector('#page2 .btn-secondary');
+    btn.disabled = back.disabled = true;
+
+    try {
+      const { company, contact, email, phone, solution, lineUserId } = collectData();
+      const fields = { company, contact, email, phone, solution, lineUserId };
+      const fingerprint = JSON.stringify(fields);
+      if (contactRequest?.fingerprint !== fingerprint) {
+        contactRequest = { fingerprint, requestId: crypto.randomUUID() };
+      }
+      const response = await fetch('/form/draft/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...fields, requestId: contactRequest.requestId }),
+      });
+      if (!response.ok) throw new Error('Contact save failed');
+      const { token } = await response.json();
+      if (!token) throw new Error('Missing confirmation token');
+      draftToken = token;
+      showPage(7);
+    } catch (error) {
+      showSaveError(error);
+    } finally {
+      btn.disabled = back.disabled = false;
+    }
+  }
+
+  function showSaveError(error) {
+    console.error('Save error:', error);
+    alert(currentLang === 'th'
+      ? 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'
+      : currentLang === 'zh' ? '发生错误，请重试' : 'An error occurred. Please try again.');
+  }
+
   // ── SUBMIT ──
   async function submitForm() {
     if (!validatePage(5)) return;
 
     const btn = document.getElementById('submitBtn');
+    if (!draftToken || btn.disabled) return;
+    const back = document.querySelector('#page5 .btn-secondary');
+    btn.disabled = back.disabled = true;
     btn.classList.add('loading');
 
     const data = collectData();
 
     try {
-      const response = await fetch('/form/submit', {
+      const response = await fetch('/form/draft/details', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, token: draftToken }),
       });
 
       if (!response.ok) throw new Error('Server error');
 
-      // Show success
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById('successPage').classList.add('active');
-      updateProgress();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    } catch (err) {
-      console.error('Submit error:', err);
+      showSuccess();
+    } catch (error) {
+      showSaveError(error);
+    } finally {
       btn.classList.remove('loading');
-      const errMsg = currentLang === 'th'
-        ? 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'
-        : currentLang === 'zh' ? '发生错误，请重试'
-        : 'An error occurred. Please try again.';
-      alert(errMsg);
+      btn.disabled = back.disabled = false;
     }
   }
 
