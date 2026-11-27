@@ -1,9 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { saveVoiceRecord } from './larkbase.js';
+import { saveVoiceRecord, createDraftVoice, updateDraftVoice } from './larkbase.js';
 import { shouldSendForm, buildFormUrl, replyLineMessage, sendThankYouMessage } from './line.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -49,6 +50,78 @@ app.post('/form/submit', async (req, res) => {
   } catch (error) {
     console.error('Form submission error:', error.message);
     console.error('Stack:', error.stack);
+  }
+});
+
+function signDraft(payload) {
+  return createHmac('sha256', process.env.LARK_APP_SECRET)
+    .update(`draft-voice:${process.env.LARK_DRAFT_TABLE_ID}:${payload}`)
+    .digest('base64url');
+}
+
+function readDraftToken(token) {
+  if (typeof token !== 'string' || token.length > 512) return null;
+  const [payload, signature, extra] = token.split('.');
+  if (!payload || !signature || extra !== undefined) return null;
+  const expected = Buffer.from(signDraft(payload));
+  const supplied = Buffer.from(signature);
+  if (expected.length !== supplied.length || !timingSafeEqual(expected, supplied)) return null;
+
+  const [recordId, solution, expiresAt] = payload.split(':');
+  if (!/^rec[a-zA-Z0-9]+$/.test(recordId) || Number(expiresAt) <= Date.now()) return null;
+  return { recordId, solution };
+}
+
+app.post('/form/draft/contact', async (req, res) => {
+  if (!process.env.LARK_DRAFT_TABLE_ID) return res.sendStatus(404);
+
+  const { requestId, solution, lineUserId, ...body } = req.body ?? {};
+  const fields = ['company', 'contact', 'email', 'phone'];
+  if (
+    !['veggie', 'food'].includes(solution) ||
+    typeof requestId !== 'string' ||
+    !/^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(requestId) ||
+    !fields.every(key => typeof body[key] === 'string' && body[key].trim()) ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim())
+  ) return res.sendStatus(400);
+
+  const contact = Object.fromEntries(fields.map(key => [key, body[key].trim()]));
+  try {
+    const recordId = await createDraftVoice({
+      ...contact, solution, lineUserId: typeof lineUserId === 'string' ? lineUserId : '',
+    }, requestId);
+    if (!recordId) throw new Error('Lark response missing record ID');
+    const payload = `${recordId}:${solution}:${Date.now() + 2 * 60 * 60 * 1000}`;
+    res.json({ token: `${payload}.${signDraft(payload)}` });
+  } catch (error) {
+    console.error('Draft contact save failed:', error.message);
+    res.sendStatus(502);
+  }
+});
+
+app.post('/form/draft/details', async (req, res) => {
+  if (!process.env.LARK_DRAFT_TABLE_ID) return res.sendStatus(404);
+
+  const { token, ...details } = req.body ?? {};
+  const draft = readDraftToken(token);
+  if (!draft) return res.sendStatus(403);
+  const commonFields = ['market', 'mainProduct', 'referral', 'extraInfo'];
+  const solutionFields = draft.solution === 'veggie'
+    ? ['vegProduct', 'vegEndProduct', 'vegVolume', 'vegPainPoints', 'vegDetails']
+    : ['foodProduct', 'foodType', 'foodVolume', 'foodOrigin', 'foodStorageTemp', 'foodTransportTemp', 'foodEndpoints'];
+  const fields = [...commonFields, ...solutionFields];
+  if (!fields.every(key => typeof details[key] === 'string') ||
+      !details.market.trim() || !details.mainProduct.trim()) return res.sendStatus(400);
+
+  try {
+    await updateDraftVoice(draft.recordId, {
+      ...Object.fromEntries(fields.map(key => [key, details[key]])),
+      solution: draft.solution,
+    });
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Draft details save failed:', error.message);
+    res.sendStatus(502);
   }
 });
 
