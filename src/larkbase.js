@@ -13,18 +13,15 @@ async function getTenantAccessToken() {
     }),
   });
   const data = await response.json();
-  console.log('Using app:', process.env.LARK_APP_ID);
-  console.log('Token response:', JSON.stringify(data, null, 2)); // add this
   if (data.code !== 0) throw new Error(`Failed to get tenant token: ${data.msg}`);
   return data.tenant_access_token;
 }
 
-export async function saveVoiceRecord(formData) {
-  const token = await getTenantAccessToken();
+function voiceFields(formData) {
 
   const isVeggie = formData.solution === 'veggie';
 
-  const fields = {
+  return {
     'Client': formData.company,
     'ชื่อผู้ติดต่อ': formData.contact,
     'อีเมลผู้ติดต่อ': formData.email,
@@ -54,24 +51,50 @@ export async function saveVoiceRecord(formData) {
       '(3PL) จุดหมายปลายทางของสินค้า': formData.foodEndpoints,
     }),
   };
+}
 
-  const fieldsJson = JSON.stringify(fields, null, 2);
-  console.log('Fields length:', fieldsJson.length);
-  console.log('Fields part 1:', fieldsJson.substring(0, 1000));
-  console.log('Fields part 2:', fieldsJson.substring(1000));
-  const response = await fetch(`https://open.larksuite.com/open-apis/bitable/v1/apps/${BASE_APP_TOKEN}/tables/${VOICE_DATA_TABLE_ID}/records`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
+export async function saveVoiceRecord(formData) {
+  return writeRecord(VOICE_DATA_TABLE_ID, voiceFields(formData));
+}
+
+function draftTableId() {
+  const tableId = process.env.LARK_DRAFT_TABLE_ID;
+  if (!/^tbl[a-zA-Z0-9]+$/.test(tableId ?? '') || tableId === VOICE_DATA_TABLE_ID) {
+    throw new Error('Configure LARK_DRAFT_TABLE_ID with the test table ID');
+  }
+  return tableId;
+}
+
+export async function createDraftVoice(formData, requestId) {
+  const fields = voiceFields(formData);
+  const contactFields = ['Client', 'ชื่อผู้ติดต่อ', 'อีเมลผู้ติดต่อ', 'เบอร์ผู้ติดต่อ', 'Cogistics Solution', 'LINE ID'];
+  return writeRecord(
+    draftTableId(),
+    Object.fromEntries(contactFields.map(key => [key, fields[key]])),
+    { requestId },
+  );
+}
+
+export async function updateDraftVoice(recordId, formData) {
+  const fields = voiceFields(formData);
+  for (const key of ['Client', 'ชื่อผู้ติดต่อ', 'อีเมลผู้ติดต่อ', 'เบอร์ผู้ติดต่อ', 'Cogistics Solution', 'LINE ID']) {
+    delete fields[key];
+  }
+  return writeRecord(draftTableId(), fields, { recordId });
+}
+
+async function writeRecord(tableId, fields, { recordId, requestId } = {}) {
+  const token = await getTenantAccessToken();
+  const url = new URL(`https://open.larksuite.com/open-apis/bitable/v1/apps/${BASE_APP_TOKEN}/tables/${tableId}/records`);
+  if (recordId) url.pathname += `/${encodeURIComponent(recordId)}`;
+  if (requestId) url.searchParams.set('client_token', requestId);
+
+  const response = await fetch(url, {
+    method: recordId ? 'PUT' : 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields }),
   });
-
-  const responseText = await response.text();
-  console.log('Full Lark response:', responseText);
-  const data = JSON.parse(responseText);
-
-  if (data.code !== 0) throw new Error(`Failed to save record: ${data.msg}`);
+  const data = await response.json();
+  if (!response.ok || data.code !== 0) throw new Error(`Lark write failed: ${data.code}`);
   return data.data?.record?.record_id;
 }
